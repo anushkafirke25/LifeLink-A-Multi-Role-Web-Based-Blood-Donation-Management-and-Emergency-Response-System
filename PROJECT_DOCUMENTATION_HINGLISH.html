@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeLink - Complete Project Documentation (Hinglish)</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.75;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 32px;
+      color: #1f2937;
+      font-size: 15px;
+    }
+    h1 { font-size: 1.85rem; margin-top: 0; margin-bottom: 1rem; color: #991b1b; border-bottom: 3px solid #dc2626; padding-bottom: 12px; }
+    h2 { font-size: 1.45rem; margin-top: 2.25rem; margin-bottom: 0.75rem; color: #b91c1c; }
+    h3 { font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.5rem; color: #dc2626; }
+    h4 { font-size: 1.05rem; margin-top: 1.25rem; margin-bottom: 0.4rem; color: #7f1d1d; }
+    p { margin: 0.9rem 0; }
+    ul, ol { margin: 0.75rem 0; padding-left: 1.75rem; }
+    li { margin: 0.5rem 0; }
+    hr { border: none; border-top: 1px solid #e5e7eb; margin: 2.25rem 0; }
+    strong { color: #991b1b; font-weight: 600; }
+    table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 13px; }
+    th, td { border: 1px solid #e5e7eb; padding: 10px 14px; text-align: left; vertical-align: top; }
+    th { background: #fef2f2; font-weight: 600; color: #991b1b; }
+    tr:nth-child(even) { background: #fffbeb; }
+    code { background: #f3f4f6; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+    .intro { background: #fef2f2; padding: 24px; border-radius: 8px; border-left: 4px solid #dc2626; margin-bottom: 2rem; }
+    .section-num { color: #6b7280; font-weight: 500; }
+    .code-block { background: #1e293b; color: #e2e8f0; padding: 16px 20px; border-radius: 8px; overflow-x: auto; font-family: 'Consolas','Monaco',monospace; font-size: 13px; line-height: 1.6; margin: 1rem 0; }
+    .code-block .comment { color: #94a3b8; }
+    .code-block .keyword { color: #f472b6; }
+    .code-block .string { color: #86efac; }
+    .code-block .func { color: #60a5fa; }
+    .explain-box { background: #f0fdf4; border-left: 4px solid #22c55e; padding: 12px 16px; margin: 0.75rem 0; font-size: 14px; }
+    .flowchart-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; margin: 1.5rem 0; }
+    .flowchart-box h4 { margin-top: 0; }
+    .mermaid { text-align: center; }
+    .workflow-text { background: #fffbeb; border: 1px solid #fde68a; padding: 16px; font-family: monospace; font-size: 12px; line-height: 1.8; overflow-x: auto; white-space: pre; }
+    @media print {
+      body { padding: 24px; font-size: 12px; }
+      h1 { font-size: 1.5rem; }
+      h2 { font-size: 1.2rem; page-break-after: avoid; }
+      h3, h4 { page-break-after: avoid; }
+      table { page-break-inside: avoid; font-size: 11px; }
+      .intro { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      hr { margin: 1.5rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+<h1>LifeLink - Blood Donation Management System</h1>
+<h2>Complete Project Documentation (Hinglish)</h2>
+<p><strong>For Project Defense & Evaluation – Zero Technical Background Assumed</strong></p>
+
+<div class="intro">
+  <h3>How to Read This Document</h3>
+  <p>This documentation is written for someone who has <strong>no prior knowledge of web development</strong>. You may not know what HTML, CSS, JavaScript, or databases are – that is completely fine. Every concept is explained in simple language with full paragraphs. The goal is to prove that the team fully understands how and why the project works, and can answer any question from an external evaluator during project defense.</p>
+</div>
+
+<hr>
+<h1>PART 1: FEATURE OVERVIEW (WITHOUT CODE)</h1>
+<hr>
+
+<h2><span class="section-num">1.1</span> What Is This Project About?</h2>
+<p><strong>LifeLink</strong> ek Blood Donation Management System hai. Simple words mein, ye ek website hai jahan:</p>
+<ul>
+  <li><strong>Donors</strong> (blood donate karne wale) apna donation track kar sakte hain, nearby blood banks dekh sakte hain, aur emergency blood requests ko respond kar sakte hain.</li>
+  <li><strong>Hospitals</strong> blood ki requests create kar sakte hain, nearby blood banks ka inventory dekh sakte hain, aur blood donation campaigns organize kar sakte hain.</li>
+  <li><strong>Blood Banks</strong> apna blood inventory manage kar sakte hain, donors ko appointments de sakte hain, aur hospital requests ko fulfill kar sakte hain.</li>
+</ul>
+<p>Ye teeno types ke users ek hi system se connected hain. Agar kisi hospital ko blood chahiye, to wo request create karti hai; donors us request ko dekh kar respond karte hain; blood bank donation record karti hai aur inventory update karti hai. Sab real-time synchronized rehta hai.</p>
+
+<h2><span class="section-num">1.2</span> Who Are The Users?</h2>
+<p>Project me teen types ke users hain:</p>
+<ol>
+  <li><strong>Donor:</strong> Woh person jo blood donate karta hai. Donor register karte waqt apna blood type (A+, B+, O+, etc.) select karta hai. Donor ko emergency requests dikhti hain jo uske blood type ke liye hain, donation history, aur certificate download karne ka option.</li>
+  <li><strong>Hospital:</strong> Hospitals blood ki demand create karti hain. Wo nearby blood banks ka inventory dekh sakti hain, blood request create karti hain (jaise "O+ blood, 3 units, urgent"), aur blood donation campaigns (events) organize karti hain.</li>
+  <li><strong>Blood Bank:</strong> Blood banks donors se blood collect karti hain, inventory maintain karti hain, hospital requests ko approve karti hain, aur donors ko reminders/appointments bhejti hain.</li>
+</ol>
+
+<h2><span class="section-num">1.3</span> Login & Registration – Feature Explanation</h2>
+<h3>What It Does</h3>
+<p>Login aur Registration woh screens hain jahan user apna account banata hai ya existing account se andar aata hai. Registration pe user apna naam, email, password, phone number, aur role (Donor / Hospital / Blood Bank) select karta hai. Agar Donor select kiya to blood type bhi choose karna padta hai. Agar Blood Bank select kiya to optional signature image upload kar sakte hain jo certificate pe dikhegi.</p>
+<p>Login pe user sirf email aur password daalta hai. System check karta hai ki ye credentials sahi hain ya nahi. Agar sahi hain to user ko uske role ke hisaab se correct dashboard pe bhej diya jata hai.</p>
+<h3>Why It Exists</h3>
+<p>Bina login/registration ke system ko pata nahi chalega user kaun hai, kya role hai, aur kya data dikhana hai. Har user ka apna dashboard hota hai – donor ko donor ka view, hospital ko hospital ka view. Isliye pehle identify karna zaroori hai.</p>
+<h3>How Users Interact</h3>
+<p>User pehle website open karta hai. Home page pe "Login" ya "Register" buttons dikhte hain. Register pe click karke form bharta hai aur submit karta hai. System backend pe data bhejta hai, naya user create hota hai, aur user turant uske dashboard pe redirect ho jata hai. Login pe email-password daalne ke baad bhi same – sahi credentials hone par dashboard pe redirect.</p>
+
+<h2><span class="section-num">1.4</span> Donor Dashboard – Feature Explanation</h2>
+<h3>What It Does</h3>
+<p>Donor dashboard pe donor ko teen main tabs milte hain:</p>
+<p><strong>Overview Tab:</strong> Yahan donor ko apne total donations ki count, blood type, aur "lives saved" (donation count) dikhai deti hai. Emergency blood requests list hoti hai – jo uske blood type ke liye hain. Donor in requests pe "Respond" kar sakta hai (available date/time bata kar). Donation history table hoti hai jahan past donations list hoti hain, aur completed donations ke liye "Certificate" button hota hai. Eligibility countdown bhi hota hai – jaise "84 days remaining until you can donate again" ya "You are eligible to donate."</p>
+<p><strong>Nearby Tab:</strong> Yahan donor ko nearby blood banks aur hospitals ki list dikhai deti hai. "Use my location" button se browser user ki current location (GPS) use karta hai, aur distance ke hisaab se nearest facilities dikhata hai. Agar address profile me hai to bina GPS ke bhi distance approximate calculate ho sakti hai.</p>
+<p><strong>Events Tab:</strong> Yahan upcoming blood donation campaigns list hoti hain. Donor kisi bhi event pe register kar sakta hai.</p>
+<h3>Why It Exists</h3>
+<p>Donor ko ek jagah se sab kuch dikhna chahiye – requests, history, nearby facilities, events. Ye central hub hai jahan donor apna blood donation journey track karta hai.</p>
+<h3>How Users Interact</h3>
+<p>Donor login karte hi donor dashboard open hota hai. Tabs pe click karke Overview, Nearby, ya Events switch karta hai. Emergency request pe "Respond" pe click karke form bharta hai. Donation history me completed donation ke saamne "Certificate" pe click karke certificate download/print karta hai. Profile update button se naam, phone, address change kar sakta hai.</p>
+
+<h2><span class="section-num">1.5</span> Blood Bank Dashboard – Feature Explanation</h2>
+<h3>What It Does</h3>
+<p>Blood bank dashboard pe blood bank ko:</p>
+<ul>
+  <li><strong>Inventory:</strong> Current blood stock (A+, B+, O+, etc. ke units) dekhna aur update karna.</li>
+  <li><strong>Record Donation:</strong> Naya donation record karna – existing donor search karke ya naya donor add karke.</li>
+  <li><strong>Eligible Donors:</strong> Woh donors jo 90 din pehle donate kar chuke hain – inko reminder bhejna ya appointment schedule karna.</li>
+  <li><strong>Scheduled Appointments:</strong> Aaj ke ya future ke appointments – "Mark Donation Done" se donation complete mark karna.</li>
+  <li><strong>Hospital Requests:</strong> Pending requests – approve karke fulfill karna. Agar insufficient inventory ho to partial fulfill bhi option hai.</li>
+  <li><strong>Profile:</strong> Blood bank ka naam, phone, address, aur <strong>signature</strong> (certificate pe dikhne wali) update karna.</li>
+</ul>
+<h3>Why It Exists</h3>
+<p>Blood bank ko ek hi jagah se inventory, donors, requests, aur appointments manage karne hote hain. Ye dashboard sab operations ko centralize karta hai.</p>
+<h3>How Users Interact</h3>
+<p>Blood bank login karte hi ye dashboard dikhai deta hai. "Record Donation" pe click karke donor search karte hain ya naya donor add karte hain, units enter karke submit karte hain. "Update Inventory" se blood type select karke units set karte hain. Hospital request pe "Approve" pe click karke fulfill karte hain. Profile me signature image upload karke certificate me apni custom signature use kar sakte hain.</p>
+
+<h2><span class="section-num">1.6</span> Hospital Dashboard – Feature Explanation</h2>
+<h3>What It Does</h3>
+<p>Hospital dashboard pe hospital ko:</p>
+<ul>
+  <li><strong>Available Blood Inventory:</strong> Nearby blood banks ka blood stock – blood type wise, distance ke saath. List view ya grouped view me dekh sakte hain. Search, filter, sort options hain.</li>
+  <li><strong>Create Blood Request:</strong> Blood type, units, priority (critical/urgent/regular), notes ke saath request create karni hoti hai.</li>
+  <li><strong>My Requests:</strong> Jo requests hospital ne create ki hain – unka status (pending/approved/fulfilled) aur donor responses dekh sakte hain.</li>
+  <li><strong>Events Tab:</strong> Blood donation campaigns create/edit/delete kar sakte hain, registrations dekh sakte hain, Excel export kar sakte hain.</li>
+  <li><strong>Profile:</strong> Hospital ka naam, phone, address update – address se distance calculation me help milti hai.</li>
+</ul>
+<h3>Why It Exists</h3>
+<p>Hospital ko blood ki demand create karni hai aur nearby supply dekhni hai. Request create karke donors respond karte hain, blood bank approve karti hai. Events se campaigns run karte hain.</p>
+<h3>How Users Interact</h3>
+<p>Hospital login karte hi dashboard open hota hai. "Create Blood Request" pe click karke form bharte hain. Inventory tab me "Use my location" se distance based results dekh sakte hain. My Requests me refresh karke donor responses check karte hain. Events tab me campaigns create karte hain aur registrations export karte hain.</p>
+
+<h2><span class="section-num">1.7</span> Certificate Generation – Feature Explanation</h2>
+<h3>What It Does</h3>
+<p>Jab donor ka koi donation <strong>completed</strong> hota hai, donation history table me us donation ke saamne "Certificate" button dikhai deta hai. Button pe click karne par ek naya browser window open hota hai jisme ek formatted certificate dikhai deta hai – donor ka naam, donation date, blood type, units, blood bank ka naam, aur "Authorized Signatory" section (blood bank ki signature ke saath). Browser ka Print dialog automatically open hota hai, jahan se user "Save as PDF" choose karke certificate ko PDF file ke roop me save kar sakta hai.</p>
+<h3>Why It Exists</h3>
+<p>Donors ko donation complete hone par appreciation certificate chahiye hoti hai. Ye unke record ke liye useful hoti hai aur motivation bhi deti hai. Certificate ko official look dene ke liye blood bank ki signature use hoti hai.</p>
+<h3>How Users Interact</h3>
+<p>Donor Donor Dashboard &gt; Overview &gt; Donation History me jata hai. Completed donation ke row me "Certificate" button pe click karta hai. Naya window open hota hai, certificate dikhai deta hai, Print dialog aata hai. User "Save as PDF" select karke file save karta hai. Certificate server pe store nahi hoti – client-side (user ke browser) pe generate hoti hai aur user khud save karta hai.</p>
+
+<h2><span class="section-num">1.8</span> Distance Calculation – Feature Explanation</h2>
+<h3>What It Does</h3>
+<p>Jab donor ya hospital "Use my location" pe click karta hai, browser user ki current GPS location (latitude, longitude) leta hai. Is location se nearby blood banks/hospitals ki distance calculate hoti hai – <strong>Haversine formula</strong> use karke (Earth ko sphere maan kar do points ke beech exact distance km me). Result sort hota hai – sabse paas wala pehle.</p>
+<p>Agar user ne location allow nahi kiya ya address se kaam chal raha hai, to <strong>address-based distance</strong> use hoti hai – pincode, city, state match karke approximate distance (0.5 km, 1 km, 5 km, 50 km, 200 km) assign hoti hai.</p>
+<h3>Why It Exists</h3>
+<p>Donor aur hospital dono ko nearest facilities dekhni hoti hain. Distance se pata chal jata hai kaun si blood bank ya hospital sabse paas hai. GPS accurate hota hai; address fallback hai jab GPS na mile.</p>
+<h3>How Users Interact</h3>
+<p>Donor/Hospital "Nearby" ya "Inventory" tab me "Use my location" pe click karta hai. Browser permission maangta hai – allow karne par location milti hai aur distance-based sorted list dikhai deti hai. Deny karne par message aata hai ki address profile me add karein.</p>
+
+<h2><span class="section-num">1.9</span> Inventory Management – Feature Explanation</h2>
+<h3>What It Does</h3>
+<p>Blood bank apna inventory manage karti hai – har blood type (A+, A-, B+, B-, AB+, AB-, O+, O-) ke liye units set/update kar sakti hai. "Update Inventory" se blood type select karke total units enter karte hain. Ye total set hota hai (add nahi) – matlab agar pehle 10 tha aur 5 enter kiya to ab 5 ho jayega.</p>
+<p>Hospital ko nearby blood banks ka <strong>combined</strong> inventory dikhai deta hai – matlab sab blood banks ka stock ek table me, blood type wise, distance ke saath.</p>
+<h3>Why It Exists</h3>
+<p>Blood bank ko stock track karna zaroori hai. Hospital ko pata hona chahiye kis blood bank me kitna blood available hai taaki request sahi jagah bheji ja sake.</p>
+<h3>How Users Interact</h3>
+<p>Blood bank dashboard me "Update Inventory" pe click karke form khulta hai – blood type select, units enter, submit. Hospital inventory tab me list/grouped view me sab dikh jata hai.</p>
+
+<h2><span class="section-num">1.10</span> Blood Donation Campaigns (Events) – Feature Explanation</h2>
+<h3>What It Does</h3>
+<p>Hospitals blood donation campaigns (events) create karti hain – title, description, date, time, location, contact info, requirements, aur optional image ke saath. Donors Events tab me ye campaigns dekh kar register kar sakte hain. Hospital apne events ki list dekh sakti hai, edit/delete kar sakti hai, aur registered donors ki list Excel me export kar sakti hai.</p>
+<h3>Why It Exists</h3>
+<p>Campaigns se organized blood donation drives hoti hain. Donors ek jagah pe aake donate karte hain. Hospital registrations track karti hai aur Excel me data le kar planning kar sakti hai.</p>
+<h3>How Users Interact</h3>
+<p>Hospital Events tab me "Create Campaign" pe click karke form bharti hai, image upload karti hai. Donor Events tab me campaign card pe "Register" pe click karke apna naam, email, phone, blood type daalta hai. Hospital "View Registrations" se list dekh sakti hai aur "Export to Excel" se file download kar sakti hai.</p>
+
+<h2><span class="section-num">1.11</span> Multilingual Support – Feature Explanation</h2>
+<h3>What It Does</h3>
+<p>Website pe language switcher hai – English, Hindi (हिंदी), Marathi (मराठी), aur Telugu (తెలుగు). User language change karte hi poora UI (buttons, labels, messages) us language me translate ho jata hai. Selection browser ke local storage me save hoti hai taaki next visit pe bhi wahi language rahe.</p>
+<h3>Why It Exists</h3>
+<p>India me different regions me different languages bolte hain. Hinglish/multilingual support se zyada users comfortable feel karte hain aur project ko inclusive banata hai.</p>
+<h3>How Users Interact</h3>
+<p>Header me globe icon (🌐) pe hover karke dropdown khulta hai. User apni language select karta hai – turant UI translate ho jata hai.</p>
+
+<h2><span class="section-num">1.12</span> Custom Cursor – Feature Explanation</h2>
+<h3>What It Does</h3>
+<p>Desktop pe default mouse cursor hide ho jata hai aur ek soft red glow circle mouse ke peeche smooth animation ke saath follow karta hai. Mobile/touch devices pe ye feature <strong>disable</strong> rehta hai – kyunki touch me cursor ka sense nahi hota.</p>
+<h3>Why It Exists</h3>
+<p>Ye purely visual/UX enhancement hai – project ko modern aur polished feel dene ke liye. Brand color (red) se consistent hai.</p>
+<h3>How Users Interact</h3>
+<p>Koi extra interaction nahi – cursor automatically mouse follow karta hai. Mobile pe default cursor hi dikhai deta hai.</p>
+
+<hr>
+<h1>WORKFLOW &amp; CHARTS – Visual Summary</h1>
+<hr>
+
+<div class="flowchart-box">
+  <h4>1. System Architecture – Overall Flow</h4>
+  <div class="mermaid">
+flowchart TB
+    subgraph Client["🌐 Frontend (React)"]
+        A[User Browser] --> B[Login/Register]
+        A --> C[Donor Dashboard]
+        A --> D[Hospital Dashboard]
+        A --> E[Blood Bank Dashboard]
+    end
+    subgraph Server["🖥️ Backend (Node.js + Express)"]
+        F[Auth API] --> G[User Model]
+        H[Donor API] --> I[Donation Model]
+        H --> J[BloodRequest Model]
+        K[Hospital API] --> J
+        L[BloodBank API] --> I
+        L --> M[Inventory Model]
+    end
+    subgraph DB["📦 MongoDB"]
+        G
+        I
+        J
+        M
+    end
+    B --> F
+    C --> H
+    D --> K
+    E --> L
+  </div>
+</div>
+
+<div class="flowchart-box">
+  <h4>2. Login Flow</h4>
+  <div class="mermaid">
+flowchart LR
+    A[User enters Email + Password] --> B[POST /api/auth/login]
+    B --> C{Credentials Valid?}
+    C -->|Yes| D[Backend returns user data]
+    C -->|No| E[Error: Login failed]
+    D --> F[setUser in localStorage]
+    F --> G{Role?}
+    G -->|donor| H[Redirect to /donor]
+    G -->|hospital| I[Redirect to /hospital]
+    G -->|bloodbank| J[Redirect to /bloodbank]
+  </div>
+</div>
+
+<div class="flowchart-box">
+  <h4>3. Certificate Generation Flow</h4>
+  <div class="mermaid">
+flowchart TD
+    A[Donor clicks Certificate button] --> B[generateCertificate donation, user]
+    B --> C[Build HTML template with donor name, date, blood type, units]
+    C --> D[Use blood bank signature or /after.png]
+    D --> E[window.open - New blank window]
+    E --> F[document.write certificate HTML]
+    F --> G[Wait for image load]
+    G --> H["certificateWindow.print()"]
+    H --> I[User: Save as PDF]
+  </div>
+</div>
+
+<div class="flowchart-box">
+  <h4>4. Record Donation Flow (Blood Bank)</h4>
+  <div class="mermaid">
+flowchart TD
+    A[Blood Bank: Record Donation form] --> B{donorId given?}
+    B -->|Yes| C[Find existing donor by ID]
+    B -->|No| D{Donor exists by email?}
+    D -->|No| E[Create new User donor]
+    D -->|Yes| F[Update donor info]
+    C --> G[Create Donation status: completed]
+    E --> G
+    F --> G
+    G --> H[Inventory.findOneAndUpdate $inc units]
+    H --> I[Create scheduled Donation - 90 days later]
+    I --> J[Return success]
+  </div>
+</div>
+
+<div class="flowchart-box">
+  <h4>5. Distance Calculation Flow</h4>
+  <div class="mermaid">
+flowchart TD
+    A[User clicks Use my location] --> B[navigator.geolocation.getCurrentPosition]
+    B --> C{Location allowed?}
+    C -->|Yes| D[Get lat, lng]
+    C -->|No| E[Show error: Use profile address]
+    D --> F[API call with lat, lng params]
+    F --> G[Backend: haversineKm for each facility]
+    G --> H[Sort by distance ascending]
+    H --> I[Return sorted list]
+  </div>
+</div>
+
+<div class="flowchart-box">
+  <h4>6. Custom Cursor Animation Logic</h4>
+  <div class="mermaid">
+flowchart LR
+    A[mousemove event] --> B[targetRef = mouse coords]
+    B --> C[requestAnimationFrame loop]
+    C --> D[position += target - position * 0.12]
+    D --> E[Update div left, top]
+    E --> C
+  </div>
+</div>
+
+<hr>
+<h1>PART 2: USER FLOW (SCREEN-BY-SCREEN)</h1>
+<hr>
+
+<h2><span class="section-num">2.1</span> First Visit – Home Page</h2>
+<p><strong>User kya karta hai:</strong> Website ka URL open karta hai (e.g. <code>http://localhost:3000</code>).</p>
+<p><strong>User kya dekhta hai:</strong> Ek home page jisme:</p>
+<ul>
+  <li>Top pe navigation bar – LifeLink logo, Language switcher, Login aur Register buttons.</li>
+  <li>Hero section – bada headline "Save Lives Through Blood Donation", subtitle, aur "Get Started" button.</li>
+  <li>Sliding image carousel – blood donation related images auto-slide hoti hain (har 4.5 second pe).</li>
+  <li>Teen feature cards – Donor, Hospital, Blood Bank ke liye – har ek pe "Get started" link.</li>
+  <li>Stats section – 1000+ Donors, 50+ Hospitals, 20+ Blood Banks, 5000+ Lives Saved.</li>
+  <li>Footer – copyright.</li>
+</ul>
+<p><strong>System kya karta hai:</strong> Home page static content dikhata hai. Koi login check nahi – koi bhi dekh sakta hai.</p>
+
+<h2><span class="section-num">2.2</span> Register Flow</h2>
+<p><strong>User kya karta hai:</strong> "Register" button pe click karta hai.</p>
+<p><strong>User kya dekhta hai:</strong> Registration form – Name, Email, Password, Phone, Role (Donor/Hospital/Blood Bank), aur role ke hisaab se extra fields. Donor ke liye Blood Type, Blood Bank ke liye optional Signature upload. Detailed address fields – Street, Area, City, State, Pincode (distance calculation ke liye zaroori).</p>
+<p><strong>User kya karta hai:</strong> Form bharta hai aur "Create Account" pe click karta hai.</p>
+<p><strong>System kya karta hai:</strong></p>
+<ol>
+  <li>Form data backend API ko bhejta hai (<code>/api/auth/register</code>).</li>
+  <li>Backend user create karta hai (password encrypt karke), database me save karta hai.</li>
+  <li>Response me user data (id, name, email, role, etc.) aata hai.</li>
+  <li>Frontend ye data browser ke <strong>local storage</strong> me save karta hai (temporary session ke liye).</li>
+  <li>Role ke hisaab se redirect: Donor → <code>/donor</code>, Hospital → <code>/hospital</code>, Blood Bank → <code>/bloodbank</code>.</li>
+</ol>
+<p><strong>User kya dekhta hai:</strong> Turant uske dashboard pe redirect ho jata hai – welcome message ke saath.</p>
+
+<h2><span class="section-num">2.3</span> Login Flow</h2>
+<p><strong>User kya karta hai:</strong> "Login" button pe click karta hai, email aur password daalta hai, "Login" submit karta hai.</p>
+<p><strong>System kya karta hai:</strong></p>
+<ol>
+  <li>Email-password backend ko bhejta hai (<code>/api/auth/login</code>).</li>
+  <li>Backend credentials verify karta hai – database me user dhundta hai, password match check karta hai.</li>
+  <li>Agar sahi – user data wapas bhejta hai.</li>
+  <li>Frontend user data local storage me save karta hai.</li>
+  <li>Role ke hisaab se redirect – Donor/Hospital/Blood Bank dashboard.</li>
+</ol>
+<p><strong>User kya dekhta hai:</strong> Dashboard – role ke hisaab se alag content.</p>
+
+<h2><span class="section-num">2.4</span> Donor Dashboard Flow</h2>
+<p><strong>User kya dekhta hai (pehli baar):</strong></p>
+<ul>
+  <li>Header: "Welcome, [Name]!", Language switcher, Update Profile, Logout.</li>
+  <li>Tabs: Overview | Nearby | Events.</li>
+  <li>Overview tab by default open – stats cards (Total Donations, Blood Type, Lives Saved), eligibility banner (green = eligible, yellow = X days remaining), emergency requests list, donation history table.</li>
+</ul>
+<p><strong>User "Respond" pe click karta hai (emergency request pe):</strong> Modal khulta hai – Available Date, Available Time, Message (optional). User bharke Submit karta hai. System donor response backend ko bhejta hai. Success message aata hai, list refresh hoti hai.</p>
+<p><strong>User "Certificate" pe click karta hai (completed donation pe):</strong> Naya window open hota hai – certificate dikhai deta hai, Print dialog aata hai. User Save as PDF karta hai.</p>
+<p><strong>User "Nearby" tab pe jata hai:</strong> "Use my location" pe click – browser permission maangta hai. Allow pe coords mile, API call hogi, nearby blood banks aur hospitals distance ke saath table me dikhenge. Deny pe error message.</p>
+<p><strong>User "Events" tab pe jata hai:</strong> Campaigns list – Register pe click karke form, submit – registration complete.</p>
+
+<h2><span class="section-num">2.5</span> Blood Bank Dashboard Flow</h2>
+<p><strong>User kya dekhta hai:</strong></p>
+<ul>
+  <li>Stats: Total Inventory, Eligible Donors, Scheduled Appointments, Hospital Requests.</li>
+  <li>Record Donation section – Add Record button.</li>
+  <li>Inventory table – blood type wise units, Update Inventory form.</li>
+  <li>Eligible Donors list – Remind, Schedule buttons.</li>
+  <li>Scheduled Appointments – aaj ke appointments me "Mark Donation Done".</li>
+  <li>Hospital Requests – Approve button.</li>
+</ul>
+<p><strong>User "Record Donation" pe click karta hai:</strong> Form khulta hai. Donor search box me type karta hai (2+ chars) – existing donors list aati hai. Select kare ya naya donor add kare (name, email, phone, blood type, password for new). Units, notes daal ke Submit. Backend donation create karta hai, inventory update karta hai.</p>
+<p><strong>User Hospital Request pe "Approve" pe click karta hai:</strong> Confirmation modal – "Approve this request?" Confirm pe backend process karta hai. Agar inventory kam hai to "Partial fulfill?" option aata hai.</p>
+
+<h2><span class="section-num">2.6</span> Hospital Dashboard Flow</h2>
+<p><strong>User kya dekhta hai:</strong></p>
+<ul>
+  <li>Tabs: Inventory | My Requests | Events.</li>
+  <li>Inventory tab – nearby blood banks ka stock, "Use my location", filters (blood type, location search, sort).</li>
+  <li>Create Blood Request button – form: blood type, units, priority, notes.</li>
+  <li>My Requests – table me requests, status, donor responses expandable.</li>
+</ul>
+<p><strong>User "Create Blood Request" pe click karta hai:</strong> Form bharke Submit. Backend request create karta hai, donors ko emergency list me dikhai deti hai.</p>
+<p><strong>User Events tab pe jata hai:</strong> Campaigns create/edit/delete, registrations dekhna, Excel export.</p>
+
+<hr>
+<h1>PART 3: CODE EXPLANATION (FILE-BY-FILE)</h1>
+<hr>
+
+<h2><span class="section-num">3.1</span> Technical Background (Simple Explanation)</h2>
+<p><strong>Frontend</strong> matlab woh part jo user ke browser me chal raha hai – buttons, forms, tables jo user dekh raha hai. Ye <strong>React</strong> use karta hai – ek JavaScript library jo UI components banane me help karti hai. Files ka extension <code>.jsx</code> hota hai (JavaScript + HTML-like syntax).</p>
+<p><strong>Backend</strong> matlab woh server jo database se baat karta hai, data process karta hai, aur frontend ko API responses bhejta hai. Ye <strong>Node.js</strong> pe <strong>Express</strong> use karta hai. Files <code>.js</code> (JavaScript) hoti hain.</p>
+<p><strong>Database</strong> – <strong>MongoDB</strong> – data store karta hai (users, donations, requests, etc.) in collections.</p>
+<p><strong>API</strong> – Application Programming Interface – matlab frontend backend se HTTP requests bhejta hai (e.g. "give me donor history") aur backend JSON response bhejta hai.</p>
+
+<h2><span class="section-num">3.2</span> Frontend – Main Entry &amp; App Structure</h2>
+<h3>File: <code>frontend/src/index.js</code></h3>
+<p><strong>Purpose:</strong> Ye file application ka <strong>entry point</strong> hai. Jab website load hoti hai, pehle ye file run hoti hai. Ye React app ko browser ke DOM (page structure) me "mount" karta hai – matlab React ko batata hai ki "App component ko <code>root</code> id wale element me render karo."</p>
+<p><strong>Connection:</strong> Ye file <code>App.jsx</code> ko import karti hai aur <code>index.css</code> (global styles) ko load karti hai.</p>
+<p><strong>Language:</strong> Ye file <strong>JavaScript</strong> me likhi hai. <code>import</code> aur <code>ReactDOM.render</code> JavaScript syntax hain.</p>
+
+<h3>File: <code>frontend/src/App.jsx</code></h3>
+<p><strong>Purpose:</strong> Ye file <strong>routing</strong> handle karti hai – matlab URL change hone par kaunsa screen dikhana hai. <code>/</code> = Home, <code>/login</code> = Login, <code>/register</code> = Register, <code>/donor</code> = Donor Dashboard, <code>/hospital</code> = Hospital Dashboard, <code>/bloodbank</code> = Blood Bank Dashboard. Agar koi unknown URL ho to Home pe bhej deti hai.</p>
+<p><strong>Important logic:</strong> Ye file <code>CursorFollower</code> component ko bhi render karti hai – matlab custom cursor har page pe dikhai degi. Ek <code>useEffect</code> hai jo check karta hai – agar device touch-enabled hai (mobile/tablet) to <code>custom-cursor-active</code> class body pe nahi lagati; warna lagati hai. Is class se default cursor hide ho jata hai (CSS me <code>cursor: none</code>). <strong>Why this approach?</strong> Mobile pe custom cursor useful nahi – touch me mouse nahi hota. Isliye sirf desktop pe enable kiya hai.</p>
+<p><strong>Language:</strong> Ye file <strong>React (JSX)</strong> me hai. <code>Routes</code>, <code>Route</code>, <code>element</code> – ye React Router ke parts hain. JSX me HTML jaisa syntax JavaScript ke andar use hota hai.</p>
+
+<h2><span class="section-num">3.3</span> Authentication Files</h2>
+<h3>File: <code>frontend/src/utils/auth.js</code></h3>
+<p><strong>Purpose:</strong> Ye file <strong>user session</strong> ko manage karti hai. Login/Register ke baad user data browser ke <strong>local storage</strong> me save hota hai – taaki page refresh hone par bhi user logged-in rahe. <code>setUser(user)</code> – user object ko JSON string bana kar <code>localStorage.setItem('user', ...)</code> se save karta hai. <code>getUser()</code> – <code>localStorage.getItem('user')</code> se data nikaal kar parse karke return karta hai. <code>clearUser()</code> – logout pe <code>token</code> aur <code>user</code> dono remove karta hai.</p>
+<p><strong>Why local storage?</strong> Kyunki ye ek simple approach hai – server pe session maintain karne ki zaroorat nahi. Alternative: Server-side sessions (cookies) – lekin is project me frontend-heavy auth use kiya hai, development simplicity ke liye.</p>
+
+<div class="code-block">// setUser – user object ko localStorage me save karta hai
+<span class="func">export const</span> <span class="keyword">setUser</span> = (user) => {
+  <span class="keyword">if</span> (user) {
+    localStorage.<span class="func">setItem</span>(<span class="string">'user'</span>, JSON.<span class="func">stringify</span>(user));
+  } <span class="keyword">else</span> {
+    localStorage.<span class="func">removeItem</span>(<span class="string">'user'</span>);
+  }
+};
+
+<span class="comment">// getUser – stored user ko parse karke return karta hai</span>
+<span class="func">export const</span> <span class="keyword">getUser</span> = () => {
+  <span class="keyword">const</span> user = localStorage.<span class="func">getItem</span>(<span class="string">'user'</span>);
+  <span class="keyword">return</span> user ? JSON.<span class="func">parse</span>(user) : <span class="keyword">null</span>;
+};</div>
+<div class="explain-box"><strong>Kaise kaam karta hai:</strong> setUser user object leta hai, JSON.stringify se string banata hai, aur localStorage me 'user' key pe save karta hai. getUser wapas getItem karke parse karta hai – agar kuch nahi hai to null return. Isse page refresh ke baad bhi user logged-in rahta hai.</div>
+
+<p><strong>Language:</strong> Pure <strong>JavaScript</strong>.</p>
+
+<h3>File: <code>frontend/src/components/Auth/Login.jsx</code></h3>
+<p><strong>Purpose:</strong> Login form – email, password fields, submit button. User submit karta hai to <code>handleSubmit</code> function run hota hai. Ye function <code>axios.post</code> se backend ko credentials bhejta hai. Agar success – <code>response.data.user</code> milta hai, <code>setUser(userData)</code> se save hota hai, phir <code>navigate</code> se role ke hisaab se redirect (donor → <code>/donor</code>, etc.).</p>
+
+<div class="code-block"><span class="comment">// handleSubmit – form submit hone par run hota hai</span>
+<span class="keyword">const</span> handleSubmit = <span class="keyword">async</span> (e) => {
+  e.<span class="func">preventDefault</span>();
+  setError(<span class="string">''</span>);
+  <span class="keyword">try</span> {
+    <span class="keyword">const</span> response = <span class="keyword">await</span> axios.<span class="func">post</span>(<span class="string">'http://localhost:5000/api/auth/login'</span>, formData);
+    <span class="keyword">const</span> userData = response.data.user;
+    <span class="func">setUser</span>(userData);
+    <span class="keyword">if</span> (userData.role === <span class="string">'donor'</span>) navigate(<span class="string">'/donor'</span>);
+    <span class="keyword">else if</span> (userData.role === <span class="string">'hospital'</span>) navigate(<span class="string">'/hospital'</span>);
+    <span class="keyword">else if</span> (userData.role === <span class="string">'bloodbank'</span>) navigate(<span class="string">'/bloodbank'</span>);
+  } <span class="keyword">catch</span> (err) {
+    setError(err.response?.data?.message || <span class="string">'Login failed'</span>);
+  }
+};</div>
+<div class="explain-box"><strong>Kaise kaam karta hai:</strong> Form submit pe preventDefault se page reload nahi hota. axios.post se backend ko email-password bhejta hai. Success pe user data milta hai → setUser se localStorage me save → role check karke navigate() se sahi dashboard pe redirect. Error pe setError se message dikhata hai.</div>
+
+<p><strong>Logic justification:</strong> Demo accounts bhi dikhaye gaye hain (rahul@donor.com, general@hospital.com, central@bloodbank.com – password: password123) – evaluator/testing ke liye turant login test karne ke liye.</p>
+<p><strong>Language:</strong> <strong>React (JSX)</strong> – form, buttons, <code>useState</code>, <code>useNavigate</code> – sab React hooks aur JSX.</p>
+
+<h3>File: <code>frontend/src/components/Auth/Register.jsx</code></h3>
+<p><strong>Purpose:</strong> Registration form – name, email, password, phone, role, blood type (donor), address (street, area, city, state, pincode), aur blood bank ke liye optional signature upload. <code>handleChange</code> se form fields update hote hain. Role change hone par conditional fields show/hide – donor pe blood type, blood bank pe signature. Signature upload me <code>FileReader.readAsDataURL</code> use hota hai – ye image file ko base64 string me convert karta hai taaki backend me bina separate file upload ke bhej sake.</p>
+<p><strong>Why detailed address?</strong> Distance calculation ke liye pincode zaroori hai. Backend aur frontend dono pincode/city/state match karke approximate distance nikalte hain jab GPS na ho.</p>
+<p><strong>Language:</strong> <strong>React (JSX)</strong> + <strong>JavaScript</strong>.</p>
+
+<h2><span class="section-num">3.4</span> Certificate Generation</h2>
+<h3>File: <code>frontend/src/utils/certificate.js</code></h3>
+<p><strong>Purpose:</strong> Ye file <strong>donation certificate</strong> generate karti hai. Do functions hain: <code>generateCertificate(donation, user)</code> aur <code>downloadCertificate(donation, user)</code>. <code>downloadCertificate</code> sirf <code>generateCertificate</code> ko call karta hai – dono same kaam karte hain.</p>
+<p><strong>How it works (step by step):</strong></p>
+<ol>
+  <li><code>donation</code> object se blood bank name, donation date, blood type, units nikalte hain.</li>
+  <li>Blood bank ke <code>signature</code> field me agar image (base64) hai to use karte hain; warna default <code>/after.png</code> use hota hai.</li>
+  <li>Ek pura HTML document string banate hain – <code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;style&gt;</code>, <code>&lt;body&gt;</code> – certificate design ke saath. Donor name, date, blood type, units, blood bank name – sab template me inject hota hai.</li>
+  <li><code>window.open('', '_blank', 'width=800,height=600')</code> – ye <strong>JavaScript</strong> ka browser API hai – naya window/tab open karta hai.</li>
+  <li><code>certificateWindow.document.write(certificateHTML)</code> – us naye window me HTML inject karte hain.</li>
+  <li>Signature image load hone ka wait karte hain (agar hai to), phir <code>certificateWindow.print()</code> – ye browser ka Print dialog open karta hai. User "Save as PDF" choose karke file save karta hai.</li>
+</ol>
+<p><strong>Why client-side, not server-side PDF?</strong> Server pe PDF library (e.g. Puppeteer, pdfkit) use karna complex hota aur server load badhta. Client-side me browser ka built-in print-to-PDF free hai aur fast. Trade-off: Server pe certificate store nahi hoti – user khud save karta hai. Ye acceptable hai kyunki certificate ek-time download hai.</p>
+
+<div class="code-block"><span class="comment">// generateCertificate – donation aur user data se HTML certificate banata hai</span>
+<span class="func">export const</span> <span class="keyword">generateCertificate</span> = (donation, user) => {
+  <span class="keyword">const</span> bloodBankName = (bloodBank && bloodBank.name) || donation.bloodBankName || <span class="string">'LifeLink Blood Bank'</span>;
+  <span class="keyword">const</span> signatureSrc = (bloodBank && bloodBank.signature) ? bloodBank.signature : origin + <span class="string">'/after.png'</span>;
+  <span class="keyword">const</span> certificateWindow = window.<span class="func">open</span>(<span class="string">''</span>, <span class="string">'_blank'</span>, <span class="string">'width=800,height=600'</span>);
+  <span class="comment">// ... certificateHTML string with donor name, date, blood type, units, blood bank ...</span>
+  certificateWindow.document.<span class="func">write</span>(certificateHTML);
+  certificateWindow.document.<span class="func">close</span>();
+  <span class="comment">// Wait for signature image load, then trigger print</span>
+  <span class="keyword">const</span> img = certificateWindow.document.<span class="func">querySelector</span>(<span class="string">'.signature-img'</span>);
+  <span class="keyword">const</span> triggerPrint = () => certificateWindow.<span class="func">print</span>();
+  <span class="keyword">if</span> (img && img.complete) setTimeout(triggerPrint, 300);
+  <span class="keyword">else if</span> (img) { img.onload = () => setTimeout(triggerPrint, 200); }
+  <span class="keyword">else</span> setTimeout(triggerPrint, 500);
+};</div>
+<div class="explain-box"><strong>Kaise kaam karta hai:</strong> Pehle blood bank name aur signature source decide karta hai. Phir window.open se naya window khulta hai. document.write se pura HTML certificate inject hota hai. Signature image load hone ka wait karke certificateWindow.print() call hota hai – browser ka Print dialog open hota hai jahan se user "Save as PDF" kar sakta hai.</div>
+
+<p><strong>Language:</strong> <strong>JavaScript</strong>. <code>window</code>, <code>document</code>, <code>toLocaleDateString</code> – sab browser JavaScript APIs.</p>
+
+<h2><span class="section-num">3.5</span> Donor Dashboard – Deep Logic</h2>
+<h3>File: <code>frontend/src/components/Donor/DonorDashboard.jsx</code></h3>
+<p><strong>Purpose:</strong> Donor ka main dashboard – Overview, Nearby, Events tabs, emergency requests, donation history, certificate, profile update.</p>
+<p><strong>Key logic – Eligibility days:</strong></p>
+<ul>
+  <li><code>loadDashboardData</code> me donation history aati hai.</li>
+  <li>Completed donations aur scheduled donations alag filter hote hain.</li>
+  <li>Agar koi <strong>scheduled</strong> donation hai (abhi aane wali) to <code>daysUntilScheduled</code> = next donation date – today. Ye dikhaya jata hai – "Donation scheduled in X days."</li>
+  <li>Agar last <strong>completed</strong> donation hai to <code>daysSinceDonation</code> = today – last donation date. <code>daysUntilEligible</code> = 90 – daysSinceDonation. <strong>Why 90 days?</strong> WHO aur medical guidelines ke hisaab se do donations ke beech minimum 90 din gap hona chahiye donor health ke liye. Ye logic frontend me calculate hota hai – backend se history aati hai, frontend days nikalta hai.</li>
+  <li>Agar kabhi donate nahi kiya to <code>eligibilityDays = 0</code> – eligible.</li>
+</ul>
+<p><strong>Key logic – Nearby facilities:</strong></p>
+<ul>
+  <li><code>loadNearbyFacilities(coords)</code> – <code>coords</code> optional. Agar <code>coords</code> (lat, lng) diye to API ko params me bhejte hain; backend Haversine se distance calculate karta hai. Agar nahi to backend user ke profile address (pincode) se approximate distance use karta hai.</li>
+  <li><code>handleUseMyLocation</code> – <code>navigator.geolocation.getCurrentPosition</code> – ye browser API user se location permission maangta hai. Milne par coords <code>loadNearbyFacilities</code> ko pass hote hain.</li>
+</ul>
+<p><strong>Auto-refresh:</strong> <code>setInterval(loadDashboardData, 60000)</code> – har 60 second pe data refresh. Kyunki emergency requests real-time change ho sakti hain, isliye periodic refresh.</p>
+
+<div class="code-block"><span class="comment">// loadDashboardData – emergency requests, history, events, notifications fetch karta hai</span>
+<span class="keyword">const</span> loadDashboardData = <span class="keyword">async</span> () => {
+  <span class="keyword">const</span> [requestsRes, historyRes, eventsRes, notificationsRes] = <span class="keyword">await</span> Promise.<span class="func">all</span>([
+    donorAPI.<span class="func">getEmergencyRequests</span>(),
+    donorAPI.<span class="func">getDonationHistory</span>(),
+    eventAPI.<span class="func">getAllEvents</span>(<span class="string">'upcoming'</span>),
+    donorAPI.<span class="func">getNotifications</span>()
+  ]);
+  setEmergencyRequests(requestsRes.data.requests || []);
+  setDonationHistory(historyRes.data.history || []);
+  <span class="comment">// Eligibility: 90 - daysSinceLastDonation</span>
+};</div>
+<div class="code-block"><span class="comment">// loadNearbyFacilities – coords optional; agar diye to lat/lng API me bhejte hain</span>
+<span class="keyword">const</span> loadNearbyFacilities = <span class="keyword">async</span> (coords = <span class="keyword">null</span>) => {
+  <span class="keyword">const</span> params = coords && typeof coords.lat === <span class="string">'number'</span> ? { lat: coords.lat, lng: coords.lng } : undefined;
+  <span class="keyword">const</span> [bloodBanksRes, hospitalsRes] = <span class="keyword">await</span> Promise.<span class="func">all</span>([
+    donorAPI.<span class="func">getNearbyBloodBanks</span>(params),
+    donorAPI.<span class="func">getNearbyHospitals</span>(params)
+  ]);
+  setNearbyBloodBanks(bloodBanksRes.data.bloodBanks ?? []);
+  setNearbyHospitals(hospitalsRes.data.hospitals ?? []);
+};</div>
+<div class="code-block"><span class="comment">// handleUseMyLocation – browser GPS se location leta hai</span>
+<span class="keyword">const</span> handleUseMyLocation = () => {
+  navigator.geolocation.<span class="func">getCurrentPosition</span>(
+    (position) => {
+      <span class="keyword">const</span> { latitude, longitude } = position.coords;
+      <span class="func">loadNearbyFacilities</span>({ lat: latitude, lng: longitude });
+    },
+    (err) => setLocationError(t(<span class="string">'donor.nearby.locationDenied'</span>))
+  );
+};</div>
+<div class="explain-box"><strong>Kaise kaam karta hai:</strong> loadDashboardData Promise.all se parallel 4 API calls karta hai – requests, history, events, notifications. loadNearbyFacilities coords le sakta hai – agar diye to lat/lng backend ko bhejta hai, backend Haversine se distance calculate karke sorted list return karta hai. handleUseMyLocation navigator.geolocation.getCurrentPosition use karta hai – user allow kare to coords milte hain, phir loadNearbyFacilities unke saath call hoti hai.</div>
+
+<p><strong>Language:</strong> <strong>React (JSX)</strong> + <strong>JavaScript</strong>. <code>useState</code>, <code>useEffect</code>, <code>useNavigate</code>, <code>useTranslation</code> – React hooks.</p>
+
+<h2><span class="section-num">3.6</span> Blood Bank Dashboard – Key Logic</h2>
+<h3>File: <code>frontend/src/components/BloodBank/BloodBankDashboard.jsx</code></h3>
+<p><strong>Purpose:</strong> Inventory, record donation, eligible donors, appointments, hospital requests, profile.</p>
+<p><strong>Record Donation flow:</strong></p>
+<ul>
+  <li>Donor search: <code>handleSearchDonors(query)</code> – 2+ characters pe <code>bloodBankAPI.searchDonors(query)</code> call. Backend <code>User.find</code> with regex on name, email, phone – donors return karta hai. Frontend dropdown me dikhata hai.</li>
+  <li>Agar existing donor select kiya – <code>donorId</code> backend ko bhejta hai, password nahi. Agar naya donor – name, email, phone, bloodType, password (required) bhejta hai. Backend naya User create karta hai, phir Donation create karta hai.</li>
+  <li>Donation create hone par inventory bhi backend me update hoti hai.</li>
+</ul>
+<p><strong>Process Request (Hospital Request Approve):</strong></p>
+<ul>
+  <li><code>showApproveConfirm</code> – pehle confirmation modal dikhata hai. User Confirm pe <code>executeApprove</code> – backend <code>processRequest</code> call. Agar insufficient inventory – backend error bhejta hai. Frontend check karta hai – agar partial units possible hain to "Partial fulfill with X units?" confirm karta hai. User confirm kare to <code>executeApprove</code> partial units ke saath dubara call.</li>
+</ul>
+
+<div class="code-block"><span class="comment">// Backend: recordDonation (bloodbankController.js)</span>
+<span class="func">exports.recordDonation</span> = <span class="keyword">async</span> (req, res) => {
+  <span class="keyword">const</span> { donorId, name, email, phone, bloodType, password, units } = req.body;
+  <span class="keyword">let</span> donor;
+  <span class="keyword">if</span> (donorId) donor = <span class="keyword">await</span> User.<span class="func">findById</span>(donorId);
+  <span class="keyword">else if</span> (!donor) donor = <span class="keyword">await</span> User.<span class="func">create</span>({ name, email, phone, bloodType, password, role: <span class="string">'donor'</span> });
+  <span class="keyword">else</span> { <span class="comment">/* update existing donor */</span> }
+  <span class="keyword">const</span> donation = <span class="keyword">await</span> Donation.<span class="func">create</span>({ donor: donor._id, bloodBank, bloodType, units, status: <span class="string">'completed'</span>, donationDate: <span class="keyword">new</span> Date() });
+  <span class="keyword">await</span> Inventory.<span class="func">findOneAndUpdate</span>({ bloodBank, bloodType }, { $inc: { units: units || 1 } }, { upsert: <span class="keyword">true</span> });
+  <span class="keyword">await</span> Donation.<span class="func">create</span>({ donor, bloodBank, status: <span class="string">'scheduled'</span>, donationDate: <span class="keyword">new</span> Date(+<span class="keyword">new</span> Date() + 90*24*60*60*1000) });
+  res.<span class="func">json</span>({ message: <span class="string">'Donation recorded'</span>, donation });
+};</div>
+<div class="explain-box"><strong>Kaise kaam karta hai:</strong> donorId diya hai to existing donor find karta hai; nahi to email se check – agar nahi hai to naya User create. Donation record create karta hai status 'completed'. Inventory me $inc se units add karta hai. Phir 90 din baad ke liye scheduled donation bhi create karta hai – donor ko dashboard pe next eligibility dikhane ke liye.</div>
+
+<p><strong>Language:</strong> <strong>React (JSX)</strong> + <strong>JavaScript</strong>.</p>
+
+<h2><span class="section-num">3.7</span> Hospital Dashboard – Distance &amp; Inventory</h2>
+<h3>File: <code>frontend/src/components/Hospital/HospitalDashboard.jsx</code></h3>
+<p><strong>Purpose:</strong> Inventory view, create request, my requests, events.</p>
+<p><strong>Inventory source:</strong> Hospital dashboard <strong>donor API</strong> (<code>getNearbyBloodBanks</code>) use karta hai – kyunki ye API sab blood banks ka combined inventory + distance return karta hai. Hospital-specific inventory API alag nahi – donor wala API generic "nearby blood banks with inventory" hai. Isliye reuse kiya – <strong>code reuse</strong> aur consistency.</p>
+<p><strong>Distance calculation:</strong> Backend lat/lng se Haversine use karta hai. Agar hospital ne "Use my location" kiya to coords bhejte hain. Agar nahi to backend hospital profile se address/lat-lng use karta hai. Frontend me <code>calculateAddressDistance</code> (from <code>utils/location.js</code>) fallback hai – jab backend distance na bheje to pincode/city match karke approximate distance.</p>
+<p><strong>My Requests refresh:</strong> <code>setInterval(fetchMyRequests, 5000)</code> – har 5 second. Kyunki donor responses real-time aate hain, hospital ko jaldi dikhna chahiye. <strong>Why 5 seconds?</strong> Balance between real-time feel aur server load. Real WebSockets use karte to instant hota – lekin complexity badh jati, isliye polling choose kiya.</p>
+<p><strong>Language:</strong> <strong>React (JSX)</strong> + <strong>JavaScript</strong>.</p>
+
+<h2><span class="section-num">3.8</span> Distance Calculation – Backend &amp; Frontend</h2>
+<h3>File: <code>backend/utils/haversine.js</code></h3>
+<p><strong>Purpose:</strong> <strong>Haversine formula</strong> – do geographic points (latitude, longitude) ke beech distance km me. Earth ko sphere maan kar formula: <code>R = 6371</code> km (Earth radius), angles se radians, then <code>d = R * c</code> where <code>c</code> is angular distance. Ye mathematically accurate hota hai short-medium distances ke liye.</p>
+
+<div class="code-block"><span class="comment">// haversineKm – do lat/lng points ke beech distance km me</span>
+<span class="func">function</span> <span class="keyword">haversineKm</span>(lat1, lon1, lat2, lon2) {
+  <span class="keyword">const</span> R = 6371; <span class="comment">// Earth radius in km</span>
+  <span class="keyword">const</span> dLat = ((lat2 - lat1) * Math.PI) / 180;
+  <span class="keyword">const</span> dLon = ((lon2 - lon1) * Math.PI) / 180;
+  <span class="keyword">const</span> a = Math.<span class="func">sin</span>(dLat/2)**2 + Math.<span class="func">cos</span>(lat1*Math.PI/180) * Math.<span class="func">cos</span>(lat2*Math.PI/180) * Math.<span class="func">sin</span>(dLon/2)**2;
+  <span class="keyword">const</span> c = 2 * Math.<span class="func">atan2</span>(Math.<span class="func">sqrt</span>(a), Math.<span class="func">sqrt</span>(1-a));
+  <span class="keyword">return</span> Math.<span class="func">round</span>(R * c * 10) / 10;
+}</div>
+<div class="explain-box"><strong>Kaise kaam karta hai:</strong> Latitude aur longitude ko degrees se radians me convert karta hai. Haversine formula me a aur c calculate karta hai – ye Earth ko sphere maan kar do points ke beech angular distance nikalta hai. Final distance = R × c (km). Round karke ek decimal tak return karta hai.</div>
+
+<p><strong>Language:</strong> <strong>JavaScript</strong> – pure math, no React.</p>
+
+<h3>File: <code>backend/utils/pincodeDistance.js</code></h3>
+<p><strong>Purpose:</strong> Jab latitude-longitude na ho to <strong>address matching</strong> se approximate distance. Same pincode = 0.5 km, same street = 1 km, same area = 2 km, same city = 5–8 km, same state = 50 km, different state = 200 km. Ye exact nahi – rough estimate. <strong>Why?</strong> Geocoding API (Google etc.) use karte to accurate hota – lekin API key, cost, dependency. Simple address matching development me sufficient tha.</p>
+<p><strong>Language:</strong> <strong>JavaScript</strong>.</p>
+
+<h3>File: <code>frontend/src/utils/location.js</code></h3>
+<p><strong>Purpose:</strong> Frontend me bhi <code>calculateDistance</code> (Haversine) aur <code>calculateAddressDistance</code> (address matching) – hospital dashboard me fallback ke liye use hota hai jab backend distance na bheje.</p>
+
+<div class="code-block"><span class="comment">// calculateAddressDistance – pincode/city/state match se approximate distance</span>
+<span class="func">export const</span> <span class="keyword">calculateAddressDistance</span> = (address1, address2) => {
+  <span class="keyword">if</span> (address1.pincode && address2.pincode && address1.pincode === address2.pincode) <span class="keyword">return</span> 0.5;
+  <span class="keyword">if</span> (address1.street === address2.street) <span class="keyword">return</span> 1;
+  <span class="keyword">if</span> (address1.area === address2.area) <span class="keyword">return</span> 2;
+  <span class="keyword">if</span> (address1.city === address2.city) <span class="keyword">return</span> address1.area ? 5 : 8;
+  <span class="keyword">if</span> (address1.state === address2.state) <span class="keyword">return</span> 50;
+  <span class="keyword">return</span> 200; <span class="comment">// Different states</span>
+};</div>
+<div class="explain-box"><strong>Kaise kaam karta hai:</strong> GPS na hone par address fields match karke approximate distance assign karta hai. Same pincode = 0.5 km, same street = 1 km, same area = 2 km, same city = 5–8 km, same state = 50 km, different states = 200 km. Exact nahi – rough estimate for sorting.</div>
+
+<h2><span class="section-num">3.9</span> Multilingual (i18n)</h2>
+<h3>File: <code>frontend/src/i18n.js</code></h3>
+<p><strong>Purpose:</strong> <code>i18next</code> library – translations load karta hai. <code>resources</code> object me <code>en</code>, <code>hi</code>, <code>mr</code>, <code>te</code> – har language ke liye key-value pairs. Example: <code>"auth.login.title": "Login to LifeLink"</code> (en), <code>"auth.login.title": "लाइफलिंक में लॉगिन करें"</code> (hi). <code>LanguageDetector</code> – browser/localStorage se preferred language detect karta hai. <code>fallbackLng: 'en'</code> – agar koi key missing ho to English use hogi.</p>
+<p><strong>Language:</strong> <strong>JavaScript</strong> – configuration object.</p>
+
+<h3>File: <code>frontend/src/components/LanguageSwitcher.jsx</code></h3>
+<p><strong>Purpose:</strong> Dropdown button – languages list, click pe <code>i18n.changeLanguage(lng)</code> call. Selected language pe checkmark. CSS me <code>group-hover</code> – hover pe dropdown visible.</p>
+<p><strong>Language:</strong> <strong>React (JSX)</strong>.</p>
+
+<h2><span class="section-num">3.10</span> Custom Cursor</h2>
+<h3>File: <code>frontend/src/components/CursorFollower.jsx</code></h3>
+<p><strong>Purpose:</strong> Mouse position track – <code>mousemove</code> event se <code>targetRef</code> update. <code>requestAnimationFrame</code> se continuous loop – current position ko target ki taraf slowly move (lerp: <code>prev + (target - prev) * 0.12</code>). 0.12 = 12% step – isse smooth follow, jhatka nahi. Touch device check – <code>ontouchstart</code> in window – agar hai to component return null (render nahi). Do divs – outer glow (420px), inner dot (24px) – dono <code>position: fixed</code>, mouse coords pe.</p>
+
+<div class="code-block"><span class="comment">// animate – requestAnimationFrame loop me position smoothly target ki taraf move</span>
+<span class="keyword">const</span> handleMove = (e) => { targetRef.current = { x: e.clientX, y: e.clientY }; };
+<span class="keyword">const</span> animate = () => {
+  <span class="keyword">const</span> target = targetRef.current;
+  setPosition((prev) => ({
+    x: prev.x + (target.x - prev.x) * 0.12,
+    y: prev.y + (target.y - prev.y) * 0.12,
+  }));
+  rafRef.current = requestAnimationFrame(animate);
+};
+window.<span class="func">addEventListener</span>(<span class="string">'mousemove'</span>, handleMove);</div>
+<div class="explain-box"><strong>Kaise kaam karta hai:</strong> mousemove pe targetRef me mouse coords store hote hain. animate har frame pe position ko target ki taraf 12% move karta hai (lerp). prev + (target - prev) * 0.12 = smooth lag – cursor mouse ke peeche smoothly follow karta hai, jhatka nahi lagta. requestAnimationFrame se 60fps pe smoothly update hota hai.</div>
+
+<p><strong>Language:</strong> <strong>React (JSX)</strong> + <strong>JavaScript</strong>.</p>
+
+<h3>File: <code>frontend/src/index.css</code></h3>
+<p><strong>Purpose:</strong> <code>.cursor-glow</code> – 420px circle, <code>radial-gradient</code> red transparent. <code>.cursor-glow-inner</code> – 24px dot. <code>body.custom-cursor-active { cursor: none }</code> – default cursor hide. Ye <strong>CSS</strong> hai – styling language, HTML elements ko look deti hai.</p>
+
+<h2><span class="section-num">3.11</span> API Service</h2>
+<h3>File: <code>frontend/src/services/api.js</code></h3>
+<p><strong>Purpose:</strong> <strong>Axios</strong> instance – base URL <code>http://localhost:5000/api</code>. Request interceptor – har request pe <code>localStorage</code> se user nikaal kar <code>x-mock-user-id</code> aur <code>x-mock-user-role</code> headers me add. Backend in headers se user identify karta hai (simple auth – JWT optional). Response interceptor – 401 (unauthorized) pe token remove (logout scenario). <code>authAPI</code>, <code>donorAPI</code>, <code>hospitalAPI</code>, <code>bloodBankAPI</code> – sab endpoints grouped, har ek me functions (e.g. <code>donorAPI.getDashboard()</code> = GET /donor/dashboard).</p>
+<p><strong>Why headers for user id?</strong> Kyunki project me token-based auth optional hai – development simplicity ke liye frontend user id bhejta hai, backend trust karta hai. Production me proper JWT validation honi chahiye.</p>
+<p><strong>Language:</strong> <strong>JavaScript</strong> – axios, Promises.</p>
+
+<hr>
+<h1>PART 4: DATABASE &amp; SYNCHRONIZATION</h1>
+<hr>
+
+<h2><span class="section-num">4.1</span> Database – MongoDB</h2>
+<p><strong>What is MongoDB?</strong> Ek <strong>NoSQL</strong> database – data ko "documents" (JSON-like) me store karta hai. Traditional tables (rows/columns) ki jagah "collections" hoti hain – har document flexible structure ho sakta hai.</p>
+<p><strong>Connection:</strong> <code>backend/config/db.js</code> – <code>mongoose.connect(process.env.MONGO_URI)</code>. <code>MONGO_URI</code> .env file me hai – e.g. <code>mongodb://localhost:27017/lifelink</code>. Server start hote hi connect ho jata hai.</p>
+
+<h2><span class="section-num">4.2</span> Login &amp; Registration Synchronization</h2>
+<p><strong>Flow:</strong></p>
+<ol>
+  <li>User Register form submit karta hai → Frontend <code>POST /api/auth/register</code> with form data.</li>
+  <li>Backend <code>authController.register</code> – User model se <code>User.create({...})</code> – MongoDB me naya document insert.</li>
+  <li>Backend response me <code>user</code> object bhejta hai (password exclude).</li>
+  <li>Frontend <code>setUser(userData)</code> – <code>localStorage.setItem('user', JSON.stringify(userData))</code>.</li>
+  <li>Redirect – <code>navigate('/donor')</code> etc. Dashboard load hote hi <code>getUser()</code> se localStorage se user mil jata hai – session persist.</li>
+</ol>
+<p><strong>Login:</strong> Same – backend verify, user return, frontend localStorage me save, redirect.</p>
+
+<h2><span class="section-num">4.3</span> Dashboard Data Synchronization</h2>
+<p><strong>Donor Dashboard:</strong></p>
+<ul>
+  <li><code>loadDashboardData</code> – <code>donorAPI.getEmergencyRequests()</code>, <code>getDonationHistory()</code>, etc. – sab backend APIs.</li>
+  <li>Backend <code>req.headers['x-mock-user-id']</code> se donor id leta hai – MongoDB me queries: <code>BloodRequest.find</code>, <code>Donation.find({ donor: donorId })</code>, etc.</li>
+  <li>Response frontend ko JSON me aata hai – <code>setEmergencyRequests</code>, <code>setDonationHistory</code> se state update, UI re-render.</li>
+</ul>
+<p><strong>Blood Bank / Hospital:</strong> Same pattern – user id headers me, backend filter karke data return, frontend state update.</p>
+
+<h2><span class="section-num">4.4</span> Certificate &amp; Donation History Link</h2>
+<ul>
+  <li>Certificate <strong>server pe store nahi hoti</strong> – client-side generate.</li>
+  <li>Donation history <strong>MongoDB</strong> me <code>Donation</code> collection me – <code>donor</code>, <code>bloodBank</code>, <code>donationDate</code>, <code>status: 'completed'</code>, etc.</li>
+  <li>Donor dashboard <code>getDonationHistory</code> se ye list leta hai. Frontend me completed donations ke row me "Certificate" button – click pe <code>generateCertificate(donation, user)</code> – donation object me blood bank, date, units sab hai – certificate HTML me inject ho jata hai.</li>
+  <li><strong>Sync:</strong> Donation backend me create hoti hai (blood bank record karti hai) → Donor history refresh → Certificate button dikhai deta hai. Koi alag sync nahi – history hi source of truth.</li>
+</ul>
+
+<h2><span class="section-num">4.5</span> Inventory Real-Time Update</h2>
+<ul>
+  <li>Blood bank "Update Inventory" → <code>PUT /api/bloodbank/inventory/:bloodType</code> → Backend <code>Inventory.findOneAndUpdate</code> – MongoDB me upsert. <code>loadDashboardData</code> refresh → naya inventory frontend me.</li>
+  <li>"Record Donation" → Backend donation create karta hai + Inventory me us blood type ke units <strong>add</strong> karta hai (increment). Phir <code>loadDashboardData</code> se updated inventory.</li>
+  <li>Hospital inventory view – donor API se nearby blood banks + unka inventory. Blood bank update kare to next hospital refresh (ya 60 sec auto) me updated dikhai dega.</li>
+  <li><strong>Real-time:</strong> Polling (periodic refresh) use hua hai – WebSockets nahi. Isliye "real-time" thoda delayed hai (seconds) – lekin sufficient hai.</li>
+</ul>
+
+<hr>
+<h1>PART 5: FILE PURPOSE SUMMARY</h1>
+<hr>
+
+<table>
+  <thead>
+    <tr><th>File Path</th><th>Purpose (1–2 lines)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>frontend/src/index.js</code></td><td>Application entry point – React app ko browser me mount karta hai.</td></tr>
+    <tr><td><code>frontend/src/App.jsx</code></td><td>Routing – URL ke hisaab se screens switch, CursorFollower render, cursor class body pe.</td></tr>
+    <tr><td><code>frontend/src/index.css</code></td><td>Global CSS – cursor glow, dashboard styles, animations, blob effect.</td></tr>
+    <tr><td><code>frontend/src/i18n.js</code></td><td>Multilingual – English, Hindi, Marathi, Telugu translations load aur configure.</td></tr>
+    <tr><td><code>frontend/src/utils/auth.js</code></td><td>User session – localStorage me user save/get/clear, login state manage.</td></tr>
+    <tr><td><code>frontend/src/utils/certificate.js</code></td><td>Certificate – HTML template generate, new window open, print trigger.</td></tr>
+    <tr><td><code>frontend/src/utils/location.js</code></td><td>Distance – Haversine, address-based distance, frontend fallback.</td></tr>
+    <tr><td><code>frontend/src/utils/geolocation.js</code></td><td>GPS – browser geolocation API, city name se coordinates (simple lookup).</td></tr>
+    <tr><td><code>frontend/src/services/api.js</code></td><td>API – axios instance, auth headers, donor/hospital/bloodbank API functions.</td></tr>
+    <tr><td><code>frontend/src/services/eventAPI.js</code></td><td>Events API – create, get, register, export Excel.</td></tr>
+    <tr><td><code>frontend/src/components/Auth/Login.jsx</code></td><td>Login form – email/password, backend verify, redirect by role.</td></tr>
+    <tr><td><code>frontend/src/components/Auth/Register.jsx</code></td><td>Register form – all fields, role-based extras, signature upload.</td></tr>
+    <tr><td><code>frontend/src/components/Donor/DonorDashboard.jsx</code></td><td>Donor dashboard – Overview, Nearby, Events, eligibility, requests, history, certificate.</td></tr>
+    <tr><td><code>frontend/src/components/BloodBank/BloodBankDashboard.jsx</code></td><td>Blood bank dashboard – inventory, record donation, appointments, requests, profile.</td></tr>
+    <tr><td><code>frontend/src/components/Hospital/HospitalDashboard.jsx</code></td><td>Hospital dashboard – inventory, create request, my requests, events.</td></tr>
+    <tr><td><code>frontend/src/components/Hospital/EventManagement.jsx</code></td><td>Events – create/edit/delete campaigns, registrations, Excel export.</td></tr>
+    <tr><td><code>frontend/src/components/Events/EventsList.jsx</code></td><td>Donor events – campaigns list, register form.</td></tr>
+    <tr><td><code>frontend/src/components/Home.jsx</code></td><td>Home page – hero, slider, feature cards, stats.</td></tr>
+    <tr><td><code>frontend/src/components/ImageSlider.jsx</code></td><td>Image carousel – auto-slide, dots, blood donation images.</td></tr>
+    <tr><td><code>frontend/src/components/LanguageSwitcher.jsx</code></td><td>Language dropdown – 4 languages, i18n change.</td></tr>
+    <tr><td><code>frontend/src/components/CursorFollower.jsx</code></td><td>Custom cursor – mouse follow, glow effect, touch disable.</td></tr>
+    <tr><td><code>frontend/src/components/NotificationModal.jsx</code></td><td>Modal – confirm/success/error messages, blood bank approvals.</td></tr>
+    <tr><td><code>frontend/tailwind.config.js</code></td><td>Tailwind – colors, shadows, animations configure.</td></tr>
+    <tr><td><code>backend/server.js</code></td><td>Express server – routes, middleware, MongoDB connect, CORS, body parser.</td></tr>
+    <tr><td><code>backend/config/db.js</code></td><td>MongoDB connection – mongoose connect.</td></tr>
+    <tr><td><code>backend/controllers/authController.js</code></td><td>Auth – login, register, profile update, password change.</td></tr>
+    <tr><td><code>backend/controllers/donorController.js</code></td><td>Donor – dashboard, emergency requests, respond, history, nearby, notifications.</td></tr>
+    <tr><td><code>backend/controllers/bloodbankController.js</code></td><td>Blood bank – inventory, record donation, search donors, appointments, process requests.</td></tr>
+    <tr><td><code>backend/controllers/hospitalController.js</code></td><td>Hospital – dashboard, create request, get requests, inventory.</td></tr>
+    <tr><td><code>backend/controllers/eventController.js</code></td><td>Events – create, get, register, registrations, Excel export.</td></tr>
+    <tr><td><code>backend/models/User.js</code></td><td>User schema – name, email, password, role, bloodType, address, signature.</td></tr>
+    <tr><td><code>backend/models/Donation.js</code></td><td>Donation schema – donor, bloodBank, date, bloodType, units, status.</td></tr>
+    <tr><td><code>backend/models/BloodRequest.js</code></td><td>Blood request schema – hospital, bloodType, units, priority, status.</td></tr>
+    <tr><td><code>backend/models/DonorResponse.js</code></td><td>Donor response – request, donor, availableDate, availableTime.</td></tr>
+    <tr><td><code>backend/models/Inventory.js</code></td><td>Inventory – bloodBank, bloodType, units.</td></tr>
+    <tr><td><code>backend/models/Event.js</code></td><td>Event schema – title, date, location, image, createdBy.</td></tr>
+    <tr><td><code>backend/models/EventRegistration.js</code></td><td>Event registration – event, name, email, phone, bloodType.</td></tr>
+    <tr><td><code>backend/models/Notification.js</code></td><td>Notification – donor, bloodBank, message, isRead.</td></tr>
+    <tr><td><code>backend/utils/haversine.js</code></td><td>Haversine – lat/lng se distance km.</td></tr>
+    <tr><td><code>backend/utils/pincodeDistance.js</code></td><td>Address distance – pincode/city/state matching.</td></tr>
+    <tr><td><code>backend/utils/distance.js</code></td><td>Distance sort – coordinates se sort.</td></tr>
+  </tbody>
+</table>
+
+<hr>
+<h1>PART 6: PROGRAMMING LANGUAGE IDENTIFICATION</h1>
+<hr>
+
+<p>For evaluators who ask "Ye line kis language me hai?":</p>
+<ul>
+  <li><strong>JavaScript:</strong> <code>.js</code> files – logic, functions, API calls, data handling. Example: <code>const user = getUser();</code>, <code>axios.post(...)</code>, <code>localStorage.setItem(...)</code>.</li>
+  <li><strong>React / JSX:</strong> <code>.jsx</code> files – UI components, <code>return ( &lt;div&gt;...&lt;/div&gt; )</code>, <code>useState</code>, <code>useEffect</code>, <code>useNavigate</code>. JSX = JavaScript + HTML-like syntax inside JavaScript.</li>
+  <li><strong>CSS:</strong> <code>index.css</code>, <code>tailwind.config.js</code> (theme part) – styling: colors, margins, animations. Example: <code>cursor: none;</code>, <code>border-radius: 50%;</code>.</li>
+  <li><strong>HTML:</strong> Direct HTML sirf certificate template me string ke andar – <code>certificate.js</code> me template literal. Normal React me HTML nahi, JSX use hota hai jo compile hone par HTML ban jata hai.</li>
+</ul>
+
+<hr>
+<h1>PART 7: LOGIC JUSTIFICATION &amp; ALTERNATIVES</h1>
+<hr>
+
+<h2><span class="section-num">7.1</span> Why Client-Side Certificate Instead of Server PDF?</h2>
+<p><strong>Chosen:</strong> Client-side HTML + browser print.</p>
+<p><strong>Alternative:</strong> Server-side PDF (Puppeteer, pdfkit) – backend PDF generate karke download link de.</p>
+<p><strong>Why not:</strong> Server load, complexity, dependencies. Client-side free aur simple.</p>
+<p><strong>Trade-off:</strong> Certificate server pe store nahi – user save karta hai. Acceptable for this use case.</p>
+
+<h2><span class="section-num">7.2</span> Why 90 Days for Eligibility?</h2>
+<p><strong>Chosen:</strong> 90 days between donations.</p>
+<p><strong>Reason:</strong> WHO aur medical guidelines – red blood cells recover hone me ~8–12 weeks. 90 days safe standard.</p>
+<p><strong>Alternative:</strong> 56 days (some countries) – lekin India me 90 days common guideline.</p>
+
+<h2><span class="section-num">7.3</span> Why Polling Instead of WebSockets for Real-Time?</h2>
+<p><strong>Chosen:</strong> <code>setInterval</code> se har 5–60 sec refresh.</p>
+<p><strong>Alternative:</strong> WebSockets – instant push.</p>
+<p><strong>Why not:</strong> WebSockets me backend complexity (socket server, connections). Polling simple, existing REST API reuse. Trade-off: Thoda delay – acceptable for blood requests.</p>
+
+<h2><span class="section-num">7.4</span> Why Headers (x-mock-user-id) Instead of JWT?</h2>
+<p><strong>Chosen:</strong> Frontend user id header me bhejta hai, backend trust karta hai.</p>
+<p><strong>Reason:</strong> Development speed, simple flow.</p>
+<p><strong>Production:</strong> JWT use karna chahiye – token verify, tamper-proof. Ye project development/demo focus tha.</p>
+
+<h2><span class="section-num">7.5</span> Why Address-Based Distance (Not Full Geocoding API)?</h2>
+<p><strong>Chosen:</strong> Pincode, city, state match – approximate km.</p>
+<p><strong>Alternative:</strong> Google Maps Geocoding API – address → lat/lng, phir Haversine.</p>
+<p><strong>Why not:</strong> API key, cost, rate limits. Simple matching sufficient for relative "nearby" sort.</p>
+
+<hr>
+<h1>END OF DOCUMENTATION</h1>
+<hr>
+
+<p style="font-style: italic; color: #6b7280; margin-top: 2rem;">This documentation proves that the team understands every part of the project – what it does, why it exists, how it works, and why certain approaches were chosen. It is sufficient for external evaluators, non-technical reviewers, and strict project defense questioning.</p>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof mermaid !== 'undefined') {
+      mermaid.initialize({ startOnLoad: false, theme: 'neutral' });
+      mermaid.run({ querySelector: '.mermaid', suppressErrors: true });
+    }
+  });
+</script>
+</body>
+</html>
